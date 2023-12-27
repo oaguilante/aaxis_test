@@ -1,0 +1,14 @@
+{
+    "products": [
+        {
+            "sku": "SKU12345",
+            "product_name": "Laptop Dell XPS 13",
+            "description": "Laptop ultradelgada con pantalla táctil de alta resolución y procesador de última generación."
+        },
+        {
+            "sku": "SKU67890",
+            "product_name": "Smartphone Samsung Galaxy S30",
+            "description": "Teléfono inteligente con cámara avanzada, batería de larga duración y diseño elegante."
+        }
+    ]
+}

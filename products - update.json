@@ -1,0 +1,9 @@
+{
+    "products": [
+        {
+            "sku": "SKU12345",
+            "product_name": "Play Station 5",
+            "description": "Play Station deSony."
+        }
+    ]
+}
