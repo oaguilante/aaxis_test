@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            color: #007BFF;
+            text-decoration: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f7f7f7;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+        }
+        .nav-links a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        .products-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        #result {
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="nav-links">
+        <a href="{{ path('/products/load') }}">Cargar Productos</a>
+        <a href="{{ path('/products/update') }}">Actualizar Productos</a>
+        <a href="{{ path('/products/list') }}">Listar Productos</a>
+    </div>
+    <div class="products-container">
+        <h1>Lista de Productos</h1>
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Contraseña:</label>
+        <input type="text" id="password" name="password" required>
+        <input type="submit" id="submit" value="Obtener Lista de Productos">
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>SKU</th>
+                    <th>Nombre del Producto</th>
+                    <th>Descripción</th>
+                    <th>Fecha de Creación</th>
+                    <th>Fecha de Actualización</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <p id="result"></p>
+    </div>
+
+    {% block javascripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#submit").click(function(event) {
+                    event.preventDefault();
+                    $.ajax({
+                        url: '../api/products/list',
+                        type: 'GET',
+                        beforeSend: function(xhr) {
+                            var username = $("#username").val();
+                            var password = $("#password").val();
+                            xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+                        },
+                        success: function(response) {
+                            var products = response;
+                            var tableBody = $("#productsTable tbody");
+                            tableBody.empty();
+                            products.forEach(function(product) {
+                                var row = "<tr><td>" + product.id + "</td><td>" + product.sku + "</td><td>" + product.product_name + "</td><td>" + product.description + "</td><td>" + product.created_at + "</td><td>" + product.updated_at + "</td></tr>";
+                                tableBody.append(row);
+                            });
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            $("#result").html("Error: " + jqXHR.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            color: #007BFF;
+            text-decoration: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f7f7f7;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+        }
+        .nav-links a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="nav-links">
+        <a href="{{ path('/products/load') }}">Cargar Productos</a>
+        <a href="{{ path('/products/update') }}">Actualizar Productos</a>
+        <a href="{{ path('/products/list') }}">Listar Productos</a>
+    </div>
+    <div class="form-container">
+        <h1>Cargar Productos</h1>
+        <form id="loadProductsForm">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Contraseña:</label>
+            <input type="text" id="password" name="password" required>
+            <label for="file">Archivo de productos:</label>
+            <input type="file" id="file" name="file" required>
+            <input type="submit" value="Cargar Productos">
+        </form>
+        <p id="result"></p>
+    </div>
+
+    {% block javascripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#loadProductsForm")[0].reset();
+                var formSubmitted = false;
+
+                $("#loadProductsForm").on('submit', function(event) {
+                event.preventDefault();
+
+                if (formSubmitted) {
+                    return;
+                }
+
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var file = $("#file").get(0).files[0];
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var products = e.target.result;
+
+                    $("input[type=submit]").prop("disabled", true);
+
+                    $.ajax({
+                        url: '../api/products/load',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: products,
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+                        },
+                        success: function(response) {
+                            $("#result").html("Productos cargados correctamente");
+                            formSubmitted = true;
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            $("#result").html("Error: " + jqXHR.responseText);
+                            formSubmitted = false;
+
+                            $("input[type=submit]").prop("disabled", false);
+                        }
+                    });
+                };
+                reader.readAsText(file);
+            });
+        });
+        </script>
+    {% endblock %}
+{% endblock %}
