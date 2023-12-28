@@ -45,6 +45,7 @@ class ProductController extends AbstractController
                     $existingProduct = $this->entityManager->getRepository(Product::class)->findOneBy(['sku' => $productData['sku']]);
 
                     if ($existingProduct) {
+                        $duplicateSkus[] = $productData['sku'];
                         continue; 
                     }
 
@@ -63,6 +64,10 @@ class ProductController extends AbstractController
                 }
                 $this->entityManager->flush();
                 
+                if (!empty($duplicateSkus)) {
+                    return new Response('The following SKUs already exist: ' . implode(', ', $duplicateSkus), Response::HTTP_CONFLICT);
+                }
+
                 return new Response('Products loaded successfully.', Response::HTTP_CREATED);
             } else {
                 return new Response('Incorrect payload or no products provided.', Response::HTTP_BAD_REQUEST);
