@@ -1,16 +1,17 @@
 # AaxisTest
 
-====================
 Basic Technical Test PHP Symfony Developer
 
 ## Setup
 
 ### Pre-requisites:
 
+- Git
 - Docker
-- docker-compose
+- composer
 - Postman|Apidog, etc
 - Xampp|MAMP, etc
+- Postgresql 15.5
 
 #### Docker
 
@@ -20,9 +21,9 @@ Install Docker for your platform.
 - Windows: https://store.docker.com/editions/community/docker-ce-desktop-windows
 - Linux: Please see your distributions package management system
 
-#### docker-compose
+#### composer
 
-Install docker-compose for your platform.
+Install composer for your platform.
 
 - Mac: Included with Docker
 - Windows: Included with Docker
@@ -52,7 +53,7 @@ docker-compose pull
 Now we can install our dependencies.
 
 ```bash
-lcli composer install
+composer install
 ```
 
 And finally it's time to start up our containers:
