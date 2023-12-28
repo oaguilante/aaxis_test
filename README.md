@@ -115,6 +115,7 @@ Using 'Basic Auth'
 
 And for the Apis '/api/products/load' and '/api/products/update'' use a payload like this:
 
+```json
 {
     "products": [
         {
