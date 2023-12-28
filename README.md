@@ -70,7 +70,7 @@ password: 'aaxis2018'
 Now we need to create the database.
 
 ```bash
-php bin/console doctrine:databse:create    
+php bin/console doctrine:database:create    
 ```
 
 And now create the 'product' table.
