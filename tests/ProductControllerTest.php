@@ -64,7 +64,7 @@ class ProductControllerTest extends WebTestCase
                     ->with($authorizationHeader)
                     ->willReturn(null);
 
-        $repository->method('find')->willThrowException(new \Exception('Error al instanciar Product'));
+        $repository->method('find')->willThrowException(new \Exception('Error instantiating Product.'));
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->method('getRepository')->willReturn($repository);
