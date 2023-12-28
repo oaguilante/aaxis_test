@@ -31,8 +31,8 @@ Install composer for your platform.
 
 #### Possible usage of command:
 
-`vendor/bin/phpstan analyse src tests`
-`./vendor/bin/phpunit`
+For run phpstan: `vendor/bin/phpstan analyse src tests`
+For run unit test: `./vendor/bin/phpunit`
 
 ### Installation
 
@@ -62,7 +62,15 @@ And finally it's time to start up our containers:
 docker-compose up -d
 ```
 
-Now we need to run the initial migrations for local tests:
+Now we need to create the user 'aaxis' and its password 'aaxis2018' in PostgreSQL with superuser privileges.
+
+Now we need to create the database.
+
+```bash
+php bin/console doctrine:databse:create    
+```
+
+And now create the 'product' table.
 
 ```bash
 php bin/console doctrine:migrations:migrate    
@@ -73,6 +81,10 @@ You can make AaxisTest work via console web browser or postman.
 
 # Execute from web browser
 To run from the web browser, an example URL would be: 
+
+Use de next credentials:
+Username: AdminAaxis
+Password: AdminAaxxis2018
 
 'http://localhost/aaxis_test/public/products/load'
 'http://localhost/aaxis_test/public/products/update'
