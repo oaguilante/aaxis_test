@@ -62,7 +62,10 @@ And finally it's time to start up our containers:
 docker-compose up -d
 ```
 
-Now we need to create the user 'aaxis' and its password 'aaxis2018' in PostgreSQL with superuser privileges.
+Now we need to create the user in PostgreSQL with superuser privileges.
+
+user: 'aaxis'
+password: 'aaxis2018'
 
 Now we need to create the database.
 
