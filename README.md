@@ -92,26 +92,26 @@ You can make AaxisTest work via console web browser or postman.
 # Execute from web browser
 To run from the web browser, an example URL would be: 
 
-'http://localhost/aaxis_test/public/products/load'
-'http://localhost/aaxis_test/public/products/update'
-'http://localhost/aaxis_test/public/products/list'
+- 'http://localhost/aaxis_test/public/products/load'
+- 'http://localhost/aaxis_test/public/products/update'
+- 'http://localhost/aaxis_test/public/products/list'
 
 Use de next credentials:
-Username: AdminAaxis
-Password: AdminAaxxis2018
+- Username: AdminAaxis
+- Password: AdminAaxxis2018
 
 And load de files examples products.json or products - update.json
 
 # Execute from web postman
 To run from Postman or another tool, an example URL would be:
 
-'http://localhost/aaxis_test/public/api/products/load' ->POST
-'http://localhost/aaxis_test/public/api/products/update' ->PUT
-'http://localhost/aaxis_test/public/api/products/list' ->GET
+- 'http://localhost/aaxis_test/public/api/products/load' ->POST
+- 'http://localhost/aaxis_test/public/api/products/update' ->PUT
+- 'http://localhost/aaxis_test/public/api/products/list' ->GET
 
 Using 'Basic Auth'
-Username: AdminAaxis
-Password: AdminAaxxis2018
+- Username: AdminAaxis
+- Password: AdminAaxxis2018
 
 And for the Apis '/api/products/load' and '/api/products/update'' use a payload like this:
 
