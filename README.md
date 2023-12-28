@@ -32,7 +32,7 @@ Install composer for your platform.
 #### Possible usage of command:
 
 For run phpstan: `vendor/bin/phpstan analyse src tests`
-For run unit test: `./vendor/bin/phpunit`
+For run unit test: `vendor/bin/phpunit`
 
 ### Installation
 
