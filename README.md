@@ -62,10 +62,17 @@ And finally it's time to start up our containers:
 docker-compose up -d
 ```
 
-Now we need to create the user in PostgreSQL with superuser privileges.
+Now we need to create the user in PostgreSQL with SUPER USER privileges an LOGIN.
 
 user: 'aaxis'
 password: 'aaxis2018'
+
+In the php.ini file add this file in 'Module Settings' sections
+
+extension=php_pgsql.dll
+extension=php_pdo_pgsql.dll
+
+And restart the Php services
 
 Now we need to create the database.
 
