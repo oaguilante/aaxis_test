@@ -8,9 +8,9 @@ Basic Technical Test PHP Symfony Developer
 
 - Git
 - Docker
+- Xampp|MAMP, etc
 - composer
 - Postman|Apidog, etc
-- Xampp|MAMP, etc
 - Postgresql 15.5
 
 #### Docker
